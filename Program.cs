@@ -1,39 +1,49 @@
 ﻿using System;
 
-namespace GameOverrideDemo
+namespace TugasSetelahOvr_AttackSystem
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("=== DEMO OVERRIDING & OVERLOADING (GAME SKILLS) ===\n");
-
-            PhysicalSkill slash = new PhysicalSkill("Aynie", 50f, 15f, 0.3f);
-            slash.DisplaySkillInfo();
-
-            
-            Console.WriteLine("\n--- Menguji Overloading Method ---");
+            Console.WriteLine("==================================================");
+            Console.WriteLine("       DEMO SISTEM SERANGAN (ATTACK SYSTEM)       ");
+            Console.WriteLine("==================================================\n");
 
             
-            float dmg1 = slash.CalculateDamage();
-            Console.WriteLine("Damage (tanpa parameter): " + dmg1);
+            MeleeAttack swordSlash = new MeleeAttack("Sword Slash", 60f, 2f, 0.3f);
+            swordSlash.DisplayAttackInfo();
+
+            float meleeDmg = swordSlash.ExecuteAttack();
+            Console.WriteLine($"Total Damage Melee: {meleeDmg}");
+
+            Console.WriteLine("\n--------------------------------------------------");
 
             
-            float dmg2 = slash.CalculateDamage(2.0f);
-            Console.WriteLine("Damage (multiplier 2.0): " + dmg2);
+            RangedAttack arrowShot = new RangedAttack("Fire Arrow", 45f, 15f, 80f);
+            arrowShot.DisplayAttackInfo();
+
+            float rangedDmg = arrowShot.ExecuteAttack();
+            Console.WriteLine($"Total Damage Ranged: {rangedDmg}");
+
+            Console.WriteLine("\n==================================================");
+            Console.WriteLine("          DEMO METHOD OVERLOADING AYNIEE                 ");
+            Console.WriteLine("==================================================");
 
             
-            float dmg3 = slash.CalculateDamage(1.5f, 20f);
-            Console.WriteLine("Damage (multiplier 1.5, defense 20): " + dmg3);
+            float dmg1 = swordSlash.ExecuteAttack(15f);
+            Console.WriteLine($"Hasil Damage (Defense 15): {dmg1}");
 
-            
-            float dmg4 = slash.CalculateDamage("Piercing");
-            Console.WriteLine("Damage (tipe Piercing): " + dmg4);
+            float dmg2 = swordSlash.ExecuteAttack(10f, 0.2f);
+            Console.WriteLine($"Hasil Damage (Defense 10, Dodge 20%): {dmg2}");
 
-            
-            float dmg5 = slash.CalculateDamage(true);
-            Console.WriteLine("Damage (backstab true): " + dmg5);
+            float dmgHead = arrowShot.ExecuteAttack("head");
+            Console.WriteLine($"Hasil Damage (Hit Head): {dmgHead}");
 
+            float dmgLeg = arrowShot.ExecuteAttack("leg");
+            Console.WriteLine($"Hasil Damage (Hit Leg): {dmgLeg}");
+
+            Console.WriteLine("\nTekan sembarang tombol untuk keluar...");
             Console.ReadKey();
         }
     }
